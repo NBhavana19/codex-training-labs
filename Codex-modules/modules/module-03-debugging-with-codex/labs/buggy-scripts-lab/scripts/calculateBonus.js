@@ -3,9 +3,6 @@
 const salary = Number(process.argv[2] || 50000);
 const performance = process.argv[3] || "medium";
 
-const payout = calculateBonus(salary, performance);
-console.log(`Calculated bonus for ${performance} performance: ${payout}`);
-
 const BONUS_RATES = {
   high: 0.15,
   medium: 0.08,
@@ -13,5 +10,9 @@ const BONUS_RATES = {
 };
 
 function calculateBonus(amount, level) {
-  return amount * BONUS_RATES[level];
+  const rate = BONUS_RATES[level] ?? BONUS_RATES.medium;
+  return amount * rate;
 }
+
+const payout = calculateBonus(salary, performance);
+console.log(`Calculated bonus for ${performance} performance: ${payout}`);
