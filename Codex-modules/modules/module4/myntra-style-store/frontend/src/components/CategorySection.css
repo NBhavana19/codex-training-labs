@@ -1,0 +1,23 @@
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.category-card {
+  background: #ffffff;
+  border: 1px solid #f3d3da;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.05);
+}
+
+.category-card h3 {
+  margin: 0 0 0.5rem;
+  color: #111827;
+}
+
+.category-card p {
+  margin: 0;
+  color: #6b7280;
+}

@@ -1,0 +1,20 @@
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.status-message {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #f2d8de;
+  color: #374151;
+}
+
+.error-message {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}

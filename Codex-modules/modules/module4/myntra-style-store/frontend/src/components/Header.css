@@ -1,0 +1,35 @@
+.store-header {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.store-logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ff3f6c;
+}
+
+.store-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.store-nav a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .store-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
