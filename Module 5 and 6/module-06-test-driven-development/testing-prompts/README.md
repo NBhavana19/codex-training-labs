@@ -4,6 +4,12 @@ This directory documents the second pass: how to generate test cases (or prompts
 
 For each testing type below you will find a short description plus example prompts or command templates you could feed to a test generator, describe-coded test suite, or creative partner.
 
+The current implementation now includes a lightweight automated baseline in `../todo-app`:
+- backend tests in `todo-app/backend/src/index.test.js`
+- frontend utility tests in `todo-app/frontend/src/taskUtils.test.js`
+
+Use the prompts below to expand that baseline into broader suites.
+
 ---
 
 ## 1. Unit testing

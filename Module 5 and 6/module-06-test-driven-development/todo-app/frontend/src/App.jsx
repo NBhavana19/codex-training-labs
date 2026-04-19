@@ -1,4 +1,10 @@
 import { useEffect, useState } from 'react';
+import {
+  buildTaskPayload,
+  formatTaskMeta,
+  mergeCreatedTask,
+  mergeUpdatedTask
+} from './taskUtils.js';
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:4000';
 
@@ -40,7 +46,7 @@ export default function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setStatus({ message: '', type: '' });
-    const payload = { title, due: due || null, notes };
+    const payload = buildTaskPayload({ title, due, notes });
 
     try {
       setLoading(true);
@@ -49,7 +55,7 @@ export default function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      setTasks((prev) => [created, ...prev]);
+      setTasks((prev) => mergeCreatedTask(prev, created));
       setTitle('');
       setDue('');
       setNotes('');
@@ -66,7 +72,11 @@ export default function App() {
       const updated = await fetchJson(`${API_BASE}/tasks/${task.id}/complete`, {
         method: 'PATCH'
       });
-      setTasks((current) => current.map((t) => (t.id === updated.id ? updated : t)));
+      setTasks((current) => mergeUpdatedTask(current, updated));
+      setStatus({
+        message: updated.completed ? 'Task marked complete.' : 'Task marked incomplete.',
+        type: 'success'
+      });
     } catch (error) {
       setStatus({ message: error.message, type: 'error' });
     }
@@ -109,12 +119,10 @@ export default function App() {
           />
 
           <button type="submit" disabled={loading}>
-            {loading ? 'Saving …' : 'Save task to backend'}
+            {loading ? 'Saving...' : 'Save task to backend'}
           </button>
         </form>
-        {status.message && (
-          <p className={`status ${status.type}`}>{status.message}</p>
-        )}
+        {status.message && <p className={`status ${status.type}`}>{status.message}</p>}
       </section>
 
       <section className="list">
@@ -123,7 +131,7 @@ export default function App() {
           <span>{tasks.length} item(s)</span>
         </header>
         <div className="list-body">
-          {loading && !tasks.length && <p>Loading saved tasks …</p>}
+          {loading && !tasks.length && <p>Loading saved tasks...</p>}
           {!tasks.length && !loading ? (
             <p className="empty">No tasks yet. Submit one above.</p>
           ) : (
@@ -131,9 +139,7 @@ export default function App() {
               <article key={task.id} className={task.completed ? 'completed' : ''}>
                 <div>
                   <p className="task-title">{task.title}</p>
-                  <p className="meta">
-                    {task.due ? `Due ${task.due}` : 'No due date'} · saved {new Date(task.createdAt).toLocaleTimeString()}
-                  </p>
+                  <p className="meta">{formatTaskMeta(task)}</p>
                   {task.notes && <p className="meta">{task.notes}</p>}
                 </div>
                 <button type="button" onClick={() => toggleCompletion(task)}>
