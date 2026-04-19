@@ -23,3 +23,46 @@
 
 ### Module lab takeaway
 Capture the summarization prompts and documentation checks in Module.md so future labs can reference the sample prompts, token budgets, and simple repo scaffolds. Reference the e-commerce documentary repo and the extension folder for fresh prompt ideas that scale from reading to expanding a larger project.
+
+## Implemented lab map
+
+### Lab 4.1 - Repository Summarizer (`labs/repo-summarizer`)
+- React picker UI for seeded sample files and snippets.
+- Express backend that returns structured summaries covering module purpose, entry points, dependencies, and key files.
+- Supporting docs:
+  - `docs/prompt-strategies.md`
+  - `docs/Documentary-template.md`
+
+### Lab 4.2 - README + Doc Generator (`labs/readme-generator`)
+- Tiny Node service with stub modules in `backend/src/modules`.
+- React UI for feature briefs and tone selection.
+- Generated outputs:
+  - README draft
+  - API notes
+  - validation checklist
+
+### Lab 4.3 - E-Commerce Documentary (`labs/ecommerce-documentary`)
+- Multi-layer React + Express scaffold for broader repo-reading practice.
+- Prompt comparison docs and documentary templates already included in the lab.
+
+## Sample prompts to reuse
+- Folder-level summary: "Survey the `backend/src` folder and explain the roles of routes, controllers, services, and data sources."
+- Function-level summary: "Read `backend/src/services/inventoryService.js` and summarize inputs, outputs, dependencies, and where it is called from."
+- README generation: "Use the modules in `backend/src/modules` as source material and draft Overview, Running the App, and API Notes sections. Do not invent APIs."
+- Validation prompt: "Review this generated documentation against the code and list any unsupported claims, wrong ports, missing entry points, or invented functions."
+
+## Documentation checks
+- Verify port numbers, route names, exported functions, and component/file names.
+- Confirm that README setup steps match the package scripts in each lab.
+- Keep generated prose grounded in actual files before polishing tone.
+
+## Token budget guidance
+- Small files or single functions: 300-800 input tokens.
+- Folder-level summaries: 800-2,000 input tokens depending on file count.
+- README generation and verification loops: 1,000-2,500 tokens split across generation and validation passes.
+
+## Suggested teaching flow
+1. Start with `labs/repo-summarizer` to learn prompt scope control.
+2. Move to `labs/readme-generator` to practice drafting and validating docs.
+3. Finish with `labs/ecommerce-documentary` to apply the same patterns to a larger repo.
+4. Use `labs/ecommerce-documentary-extension` when learners are ready to extend a codebase after understanding it.
