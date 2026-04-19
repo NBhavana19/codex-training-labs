@@ -75,6 +75,20 @@ body {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
+.input-row select {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
+  font-size: 1rem;
+}
+
+.input-row select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
 .input-row button {
   border: none;
   border-radius: 0.75rem;
@@ -102,6 +116,10 @@ body {
   font-weight: 600;
 }
 
+.controls-row {
+  align-items: stretch;
+}
+
 .task-list {
   margin-top: 2rem;
 }
@@ -124,9 +142,36 @@ body {
   background: #f1f5f9;
   border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .muted {
   color: #64748b;
   margin: 0;
+}
+
+.priority-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority-low {
+  background: #dcfce7;
+  color: #15803d;
 }

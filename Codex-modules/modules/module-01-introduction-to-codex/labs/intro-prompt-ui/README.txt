@@ -1,6 +1,6 @@
-Intro Prompt UI Lab · Todo List
+Intro Prompt UI Lab - Todo List
 ------------------------------
-This lab replaces the previous intro prompt UI with a lightweight todo list experience that demonstrates how to keep a React form in sync with a Node/Express API. The frontend submits new tasks to the backend, which retains them in memory and returns the updated list for display.
+This lab replaces the previous intro prompt UI with a lightweight todo list experience that demonstrates how to keep a React form in sync with a Node/Express API. The frontend submits new tasks to the backend, which retains them in memory and returns the updated list for display. Tasks now include priority and are shown from highest to lowest.
 
 ## Running the lab
 1. Backend:
@@ -19,11 +19,11 @@ This lab replaces the previous intro prompt UI with a lightweight todo list expe
    ```
    Vite serves the UI on `http://localhost:5175/` and proxies `/api` to the backend so the dev server can talk to the API without CORS issues.
 
-Once both servers are running, open the frontend URL, type a task into the box, then click “Add Task” to see it appear at the top of the list.
+Once both servers are running, open the frontend URL, type a task into the box, choose a priority, then click "Add Task" to see it appear in the correct order.
 
 ## API surface overview
-- `GET /api/tasks` — returns `{ tasks: [{ id, text }] }` with the newest entries first so the UI can render them immediately after loading.
-- `POST /api/tasks` — accepts `{ text: string }`, rejects empty submissions with a 400 error, and replies with `{ task: { id, text } }`.
+- `GET /api/tasks` - returns `{ tasks: [{ id, text, priority }] }` sorted from `high` to `low`. Tasks with the same priority stay ordered by newest first.
+- `POST /api/tasks` - accepts `{ text: string, priority?: "high" | "medium" | "low" }`, rejects empty submissions with a 400 error, and replies with `{ task: { id, text, priority } }`.
 
 ## Notes
 - Tasks live only in memory. Stopping the backend clears the saved list.

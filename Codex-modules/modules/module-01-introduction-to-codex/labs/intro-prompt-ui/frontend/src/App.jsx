@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 
+const PRIORITY_ORDER = {
+  high: 3,
+  medium: 2,
+  low: 1
+};
+
 export default function App() {
   const [taskText, setTaskText] = useState('');
+  const [priority, setPriority] = useState('medium');
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -37,7 +44,7 @@ export default function App() {
       const response = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: taskText })
+        body: JSON.stringify({ text: taskText, priority })
       });
 
       if (!response.ok) {
@@ -45,8 +52,15 @@ export default function App() {
       }
 
       const data = await response.json();
-      setTasks([data.task, ...tasks]);
+      setTasks((currentTasks) =>
+        [...currentTasks, data.task].sort(
+          (firstTask, secondTask) =>
+            PRIORITY_ORDER[secondTask.priority] - PRIORITY_ORDER[firstTask.priority] ||
+            secondTask.id - firstTask.id
+        )
+      );
       setTaskText('');
+      setPriority('medium');
     } catch (err) {
       setError('Something went wrong while saving this task.');
     } finally {
@@ -54,13 +68,19 @@ export default function App() {
     }
   };
 
+  const sortedTasks = [...tasks].sort(
+    (firstTask, secondTask) =>
+      PRIORITY_ORDER[secondTask.priority] - PRIORITY_ORDER[firstTask.priority] ||
+      secondTask.id - firstTask.id
+  );
+
   return (
     <div className="app-shell">
       <main className="card">
         <header>
-          <p className="eyebrow">Module 01 · Todo UI</p>
+          <p className="eyebrow">Module 01 - Todo UI</p>
           <h1>Your simple todo list</h1>
-          <p>Type a task in the box below and press “Add Task”.</p>
+          <p>Type a task, choose a priority, and keep the list ordered highest to lowest.</p>
         </header>
 
         <form className="task-form" onSubmit={handleSubmit}>
@@ -72,8 +92,19 @@ export default function App() {
               onChange={(event) => setTaskText(event.target.value)}
               placeholder="Buy milk, plan presentation, etc."
             />
+          </div>
+          <div className="input-row controls-row">
+            <select
+              id="task-priority"
+              value={priority}
+              onChange={(event) => setPriority(event.target.value)}
+            >
+              <option value="high">High priority</option>
+              <option value="medium">Medium priority</option>
+              <option value="low">Low priority</option>
+            </select>
             <button type="submit" disabled={loading}>
-              {loading ? 'Saving…' : 'Add Task'}
+              {loading ? 'Saving...' : 'Add Task'}
             </button>
           </div>
         </form>
@@ -83,13 +114,18 @@ export default function App() {
         <section className="task-list">
           <h2>Tasks</h2>
           {loading && tasks.length === 0 ? (
-            <p className="muted">Loading tasks…</p>
+            <p className="muted">Loading tasks...</p>
           ) : sortedTasks.length === 0 ? (
             <p className="muted">Task list is empty. Add something above.</p>
           ) : (
             <ul>
-              {tasks.map((task) => (
-                <li key={task.id}>{task.text}</li>
+              {sortedTasks.map((task) => (
+                <li key={task.id}>
+                  <span>{task.text}</span>
+                  <span className={`priority-badge priority-${task.priority}`}>
+                    {task.priority}
+                  </span>
+                </li>
               ))}
             </ul>
           )}
