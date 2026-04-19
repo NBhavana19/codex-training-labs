@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  color: #18211f;
+  background: #f6f7f3;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  background: #157a6e;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.78rem 1rem;
+}
+
+button:hover {
+  background: #0f5f56;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid #b8c2bd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #18211f;
+  padding: 0.72rem 0.78rem;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.dashboard-band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  gap: 2rem;
+  align-items: end;
+  padding: 2.5rem clamp(1rem, 5vw, 4rem);
+  background: #e7efe9;
+  border-bottom: 1px solid #cbd8d1;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: #a33d2d;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+h2 {
+  font-size: 1.35rem;
+}
+
+.intro {
+  max-width: 58ch;
+  color: #41504b;
+  line-height: 1.6;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 0.8rem;
+}
+
+.metric,
+.panel,
+.transaction-row {
+  border: 1px solid #d2ddd7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.metric {
+  display: grid;
+  gap: 0.5rem;
+  min-height: 116px;
+  padding: 1rem;
+}
+
+.metric span {
+  color: #65736e;
+  font-weight: 700;
+}
+
+.metric strong {
+  align-self: end;
+  font-size: 1.35rem;
+}
+
+.workspace,
+.transaction-section {
+  padding: 2rem clamp(1rem, 5vw, 4rem);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.3fr) minmax(280px, 0.7fr);
+  gap: 1rem;
+}
+
+.panel {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding: 1.25rem;
+}
+
+.panel h2 {
+  margin-bottom: 0.25rem;
+}
+
+.budget-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.budget-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  border-bottom: 1px solid #e5ebe7;
+  padding-bottom: 0.75rem;
+}
+
+.over {
+  color: #b03124;
+}
+
+.within,
+.income {
+  color: #157a3f;
+}
+
+.expense {
+  color: #b03124;
+}
+
+.section-heading,
+.filters,
+.transaction-row,
+.amount-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.section-heading {
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.status {
+  margin: 0;
+  color: #6d4b00;
+  font-weight: 700;
+}
+
+.filters {
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.transaction-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.transaction-row {
+  align-items: center;
+  justify-content: space-between;
+  min-height: 86px;
+  padding: 1rem;
+}
+
+.transaction-row div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.transaction-row span {
+  color: #65736e;
+}
+
+.amount-actions {
+  align-items: center;
+}
+
+.amount-actions button {
+  background: #f0c24b;
+  color: #312200;
+}
+
+.amount-actions button:hover {
+  background: #d9aa2f;
+}
+
+@media (max-width: 900px) {
+  .dashboard-band,
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .summary-grid,
+  .filters,
+  .transaction-row,
+  .amount-actions {
+    display: grid;
+  }
+
+  .budget-row {
+    grid-template-columns: 1fr;
+  }
+}
